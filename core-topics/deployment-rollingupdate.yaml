@@ -1,0 +1,42 @@
+# This deployment has a 6 replicas and is configured to perform a rolling update.
+# This means Deployment updates take place with zero downtime by incrementally updating pods instances with new ones
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2023-07-12T13:31:35Z"
+  generation: 1
+  labels:
+    app: old-deployment
+  name: old-deployment
+  namespace: default
+  resourceVersion: "963"
+  uid: 262e6b0d-be34-471b-9c11-616047131689
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 6
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: old-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: old-deployment
+    spec:
+      containers:
+      - image: nginx:1.7.9
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
