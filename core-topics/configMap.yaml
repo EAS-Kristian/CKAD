@@ -15,7 +15,7 @@ metadata:
   uid: f4e14162-36ad-4981-870c-56b706d7bcea
 
 # A pod with a single container running the kubegoldenguide/alpine-spin:1.0.0 image
-# that are exposed to the conifmaps configuration settings as environment vairables
+# that are exposed to the configmaps configuration settings as environment vairables
 
 apiVersion: v1
 kind: Pod
@@ -41,7 +41,5 @@ spec:
             name: app-config
             key: external_url
     name: pod-envvar
-    resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-status: {}

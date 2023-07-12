@@ -1,0 +1,37 @@
+# This is the configuration of a pod that runs an application. The image is a web server that has a health endpoint served at '/health'.
+# It returns a 200 status code response when the app is healthy and typically takes 60 seconds to start. Liveness and readiness probes are 
+# also configured to use the health endpoint 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod-13
+  name: pod-13
+spec:
+  containers:
+  - args:
+    - client
+    image: kubegoldenguide/question-thirteen
+    name: pod-13
+    livenessProbe: 
+      httpGet:
+        path: /health
+        port: 8000
+        httpHeaders:
+        - name: Health-Header
+          value: health
+      initialDelaySeconds: 60
+      periodSeconds: 60
+    readinessProbe: 
+      httpGet:
+        path: /health
+        port: 8000
+        httpHeaders:
+        - name: Health-Header
+          value: health
+      initialDelaySeconds: 60
+      periodSeconds: 60
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
