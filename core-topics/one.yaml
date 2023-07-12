@@ -1,0 +1,47 @@
+# A config map called app-config that contains the following entries 
+# 'connection_string' set to 'localhost:4096'
+# 'external_url' set to 'google.com'
+
+apiVersion: v1
+data:
+  connection_string: localhost:4096
+  external_url: google.com
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-07-12T10:02:10Z"
+  name: app-config
+  namespace: default
+  resourceVersion: "1657"
+  uid: f4e14162-36ad-4981-870c-56b706d7bcea
+
+# A pod with a single container running the kubegoldenguide/alpine-spin:1.0.0 image
+# that are exposed to the conifmaps configuration settings as environment vairables
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod-envvar
+  name: pod-envvar
+spec:
+  containers:
+  - args:
+    - client
+    image: kubegoldenguide/alpine-spin:1.0.0
+    env: 
+      - name: KEY
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: connection_string
+      - name: KEY2
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: external_url
+    name: pod-envvar
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
