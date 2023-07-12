@@ -1,0 +1,15 @@
+# Conifiguration to create a pod template - a pod template is the specification for creating pods 
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: Kris-template
+spec:
+  template:
+    spec:
+      containers:
+      - name: Kris-template
+        image: busybox:1.28
+        command: ['sh', '-c', 'echo "Hello, K8s!"']
+      restartPolicy: OnFailure
+

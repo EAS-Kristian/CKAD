@@ -1,0 +1,18 @@
+# Standard Pod conifguration - Command to create --> Kubectl apply -f pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Kris-pod
+spec:
+  containers:
+  - name: Kris-pod
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+  # imperative command to make this pod - kubectl run Kris-pod --image=nginx:1.14.2
+
+
+
+
