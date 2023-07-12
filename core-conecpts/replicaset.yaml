@@ -22,4 +22,4 @@ spec:
         ports:
         - containerPort: 80
 
-# imperative command to create a replicaset of the deployment - kubectl create dployment nginx-deployment --image=nginx:1.14.2 --replicas=4
+# imperative command to create this deployment - kubectl create dployment nginx-deployment --image=nginx:1.14.2 --replicas=4
