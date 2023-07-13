@@ -1,0 +1,18 @@
+# A pod is the smallest execution unit in Kubernetes. A pod contains one or more containers,
+# which house's your application. The below yaml represents a basic manifest for an nginx pod 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kris-pod-2
+  name: kris-pod-2
+spec:
+  containers:
+  - args:
+    - client
+    image: nginx
+    name: kris-pod-2
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
