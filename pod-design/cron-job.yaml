@@ -1,0 +1,19 @@
+# This is a bsic cronjob that is scheduled to run every 5 minutes and specifies 
+# the service account to be used by the job. It is also configured to restart upon failure
+
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: kris-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: kris-service-account
+          containers:
+            - name: kris-job-container
+              image: kris-job-image:latest
+          restartPolicy: OnFailure
